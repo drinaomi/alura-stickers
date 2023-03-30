@@ -3,17 +3,18 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.awt.font.*;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
 public class GeradoraDeFigurinhas {
   
-  public void cria() throws Exception {
+  public void cria(InputStream inputStream, String nomeArquivo) throws Exception {
 
     // leitura da imagem
-    BufferedImage imagemOriginal = ImageIO.read(new File("entrada/filme.jpg"));
+    // InputStream inputStream = new FileInputStream(new File("entrada/filme.jpg"));
+    // InputStream inputStream = new URL("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies_1.jpg").openStream();
+    BufferedImage imagemOriginal = ImageIO.read(inputStream);
 
     // cria nova imagem com trnsparência e com tamanho novo
     int largura = imagemOriginal.getWidth();
@@ -35,14 +36,10 @@ public class GeradoraDeFigurinhas {
 
 
     // escrever a nova imagem em um arquivo
-    ImageIO.write(novaImagem, "png", new File("saida/figurinha.png"));
+    ImageIO.write(novaImagem, "png", new File(nomeArquivo));
 
   }
 
-  public static void main(String[] args) throws Exception {
-    var geradora = new GeradoraDeFigurinhas();
-    geradora.cria();
-  }
 
 
 }
